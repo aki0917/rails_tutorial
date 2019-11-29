@@ -65,6 +65,11 @@ class User < ApplicationRecord
   # パスワード再設定のメールを送信する
   def send_password_reset_email
     UserMailer.send_password_reset(self).deliver_now
+    update_columns(reset_digest:  FILL_IN, reset_sent_at: FILL_IN)
+  end
+
+  def password_reset_exprired?
+    reset_sent_at < 2.hours.ago
   end
 
 
