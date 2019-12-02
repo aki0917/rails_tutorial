@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    #debugger
+    @microposts = @user.microposts.page(params[:page])
   end
 
   def new
